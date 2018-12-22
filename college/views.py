@@ -30,8 +30,8 @@ class CollegeDetail(APIView):
 class CourseDetail(APIView):
 
     def post(self, request):
+        data = request.data
         if isinstance(data, list):
-            data = request.data
             serializer = CourseSerializer(data = request.data, many=True)
         else:
             serializer = CourseSerializer(data = request.data)
