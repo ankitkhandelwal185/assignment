@@ -14,9 +14,9 @@ class CollegeDetail(APIView):
     def post(self, request):
         data = request.data
         if isinstance(data, list):
-            serializer = CollegeSerializer(data, many=True)
+            serializer = CollegeSerializer(data = request.data, many=True)
         else:
-            serializer = CollegeSerializer(data)
+            serializer = CollegeSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -30,11 +30,11 @@ class CollegeDetail(APIView):
 class CourseDetail(APIView):
 
     def post(self, request):
-        data = request.data
         if isinstance(data, list):
-            serializer = CourseSerializer(data, many=True)
+            data = request.data
+            serializer = CourseSerializer(data = request.data, many=True)
         else:
-            serializer = CourseSerializer(data)
+            serializer = CourseSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
