@@ -14,7 +14,7 @@ class CollegeDetail(APIView):
     def post(self, request):
         data = request.data
         if isinstance(data, list):
-            serializer = CollegeSerializer(data=request.data, many=True)
+            serializer = CollegeSerializer(data, many=True)
         else:
             serializer = CollegeSerializer(data = request.data)
         if serializer.is_valid():
