@@ -12,7 +12,11 @@ from .serializers import CollegeSerializer, CourseSerializer
 class CollegeDetail(APIView):
 
     def post(self, request):
-        serializer = CollegeSerializer(data = request.data)
+        data = request.data
+        if isinstance(data, list):
+            serializer = CollegeSerializer(data=request.data, many=True)
+        else:
+            serializer = CollegeSerializer(data = request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
@@ -26,7 +30,11 @@ class CollegeDetail(APIView):
 class CourseDetail(APIView):
 
     def post(self, request):
-        serializer = CourseSerializer(data = request.data)
+        data = request.data
+        if isinstance(data, list):
+            serializer = CourseSerializer(data, many=True)
+        else:
+            serializer = CourseSerializer(data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
