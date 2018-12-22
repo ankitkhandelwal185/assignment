@@ -16,7 +16,7 @@ class CollegeDetail(APIView):
         if isinstance(data, list):
             serializer = CollegeSerializer(data, many=True)
         else:
-            serializer = CollegeSerializer(data = request.data)
+            serializer = CollegeSerializer(data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
